@@ -19,17 +19,8 @@ class ScoreCard:
     
     def get_total(self):
         RAYA = "-"
-        total = []
         
-        if RAYA in self.pins:
-            for pin in self.pins:
-                if pin == '-':
-                    total.append(0)
-                    print("Yeah")
-                else:
-                    total.append(pin)
-                    print("Yeah")
-        print(total)
-        puntos = [int(element) for element in total]
+        newPins = self.pins.replace(RAYA, "0")
+        puntos = [int(pin) for pin in newPins]
         return sum(puntos)
-    
+                          
