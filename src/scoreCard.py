@@ -14,3 +14,22 @@ class ScoreCard:
             roll += 1
         return roll, frame_pins
 
+    def get_pins(self):
+        return self.pins
+    
+    def get_total(self):
+        RAYA = "-"
+        total = []
+        
+        if RAYA in self.pins:
+            for pin in self.pins:
+                if pin == '-':
+                    total.append(0)
+                    print("Yeah")
+                else:
+                    total.append(pin)
+                    print("Yeah")
+        print(total)
+        puntos = [int(element) for element in total]
+        return sum(puntos)
+    
