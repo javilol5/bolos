@@ -24,3 +24,10 @@ def test_get_nothing():
     total = 58
     assert card
     assert card.get_total() == total
+
+def test_get_strike():
+    PINS = "1x345123451234512345"
+    card = ScoreCard(PINS)
+    total = 75
+    assert card
+    assert card.get_total() == total
