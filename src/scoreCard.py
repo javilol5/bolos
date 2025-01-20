@@ -1,5 +1,6 @@
-
 class ScoreCard:
+    
+    MAX_VALUE = 10
 
     def __init__(self, scoreCard):
         self.pins = scoreCard
@@ -17,19 +18,34 @@ class ScoreCard:
             return sum([int(pin) for pin in newPins])
         
         if self.strike in self.pins:
-            posicion_de_x = self.pins.index("x")
-            primer_numero = self.pins[posicion_de_x+1]
-            segundo_numero = self.pins[posicion_de_x+2]
-            newPins = self.pins.replace(self.strike, "55")
-            return sum([int(pin) for pin in newPins]) + int(primer_numero) + int(segundo_numero)
-        
-        if self.slash in self.pins:
-            posicion_de_slash = self.pins.index("/")
-            primer_numero = self.pins[posicion_de_slash+1]
-            numero_slash = 10 - int(self.pins[posicion_de_slash-1])
-            newPins = self.pins.replace(self.slash, str(numero_slash))
-            newPins += str(primer_numero)
+            newPins = []
+            
+            for position_pin, pin in enumerate(self.pins):
+                if pin == self.strike:
+                    primer_numero = self.pins[position_pin+1]
+                    segundo_numero = self.pins[position_pin+2]
+                    newPins.append(str(ScoreCard.MAX_VALUE))
+                    newPins.append(primer_numero)
+                    newPins.append(segundo_numero)
+                else:
+                    newPins.append(pin) 
             return sum([int(pin) for pin in newPins])
         
+
+        if self.slash in self.pins:
+            newPins = []
+            for position_pin, pin in enumerate(self.pins):
+                if pin == self.slash:
+                    primer_numero = self.pins[position_pin+1]
+                    numero_slash = ScoreCard.MAX_VALUE - int(self.pins[position_pin-1])
+                    newPins.append(str(numero_slash))
+                    newPins.append(primer_numero)
+                    print(newPins)
+                else:
+                    newPins.append(pin)
+                    print(newPins)
+            return sum([int(pin) for pin in str(newPins) if pin.isdigit()])
+
+
         puntos = [int(pin) for pin in self.pins]
         return sum(puntos)
