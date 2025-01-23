@@ -11,6 +11,6 @@ def test_get_nothing_one():
 def test_get_nothing_two():
     PINS = "9-3561368153258-7181"
     card = ScoreCard(PINS)
-    total = 72
+    total = 82
     assert card
     assert card.get_total() == total

@@ -51,6 +51,7 @@ class ScoreCard:
         return sum(puntos)
         '''
         newPins = []
+        self.pins = self.pins.replace(self.nothing, "0")
         for position_pin, pin in enumerate(self.pins):
             
 
@@ -59,20 +60,25 @@ class ScoreCard:
                 print(newPins)
                 self.pins.replace(self.nothing, "0")
                 print(newPins)
-            if pin == self.strike:
+            elif pin == self.strike:
                 #primer_numero = self.pins[position_pin+1]
                 #segundo_numero = self.pins[position_pin+2]
                 #newPins.append(str(ScoreCard.MAX_VALUE))
                 #newPins.append(primer_numero)
                 #newPins.append(segundo_numero)
-
-                newPins.append('55')
+                if self.pins[-1] == 'X' and self.pins[-2] == 'X' and self.pins[-3] == 'X' and position_pin == len(self.pins) - 1:
+                    newPins.append('-30')
+                    print(newPins)
+                newPins.append('10')
                 print(newPins)
+                if position_pin + 1 == 'X':
+                    newPins.append('10')
+                    print(newPins)
                 if position_pin + 1 < len(self.pins):
-                    newPins.append(int(self.pins[position_pin + 1]))
+                    newPins.append(int( 10 if self.pins[position_pin + 1] == 'X' else self.pins[position_pin + 1]))
                     print(newPins)
                 if position_pin + 2 < len(self.pins):
-                    newPins.append(int(self.pins[position_pin + 2]))
+                    newPins.append(int( 10 if self.pins[position_pin + 2] == 'X' else self.pins[position_pin + 2]))
                     print(newPins)
             
             elif pin == self.slash:
@@ -80,22 +86,22 @@ class ScoreCard:
                 #numero_slash = ScoreCard.MAX_VALUE - int(self.pins[position_pin-1])
                 #newPins.append(str(numero_slash))
                 #newPins.append(primer_numero)
-
+                
                 if position_pin > 0:
-                    numero_slash = ScoreCard.MAX_VALUE - int(self.pins[position_pin - 1])
+                    numero_slash = self.MAX_VALUE - int(self.pins[position_pin - 1])
                     newPins.append(numero_slash)
                     print(newPins)
-                if position_pin + 1 < len(self.pins):
+                if position_pin + 2 < len(self.pins):
                     newPins.append(int(self.pins[position_pin + 1]))
                     print(newPins)
 
                                                                                                             #PINS = "9- 3/ 61 3/ 81 5/ -/ 8- 7/ 8-"
-            elif self.nothing in newPins:
-                newPins = [elemento for elemento in newPins if elemento != '-']
+            #elif self.nothing in newPins:
+            #    newPins = [elemento for elemento in newPins if elemento != '-']
 
             else:
                 newPins.append(pin)
                 print(newPins)
                 
-
-        return sum([int(pin) for pin in str(newPins) if pin.isdigit()])
+        suma_total = sum(int(elemento) for elemento in newPins)
+        return suma_total
