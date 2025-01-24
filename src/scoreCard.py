@@ -60,6 +60,10 @@ class ScoreCard:
                 print(newPins)
                 self.pins.replace(self.nothing, "0")
                 print(newPins)
+            
+            elif pin == self.strike and self.pins[+1] == '/':
+                
+
             elif pin == self.strike:
                 #primer_numero = self.pins[position_pin+1]
                 #segundo_numero = self.pins[position_pin+2]
