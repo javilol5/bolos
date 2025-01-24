@@ -61,8 +61,21 @@ class ScoreCard:
                 self.pins.replace(self.nothing, "0")
                 print(newPins)
             
-            elif pin == self.strike and self.pins[+1] == '/':
-                
+            elif pin == self.strike and position_pin <= len(self.pins) - 2 and self.pins[position_pin +2] == '/':
+                newPins.append('10')
+                print(newPins)
+                if position_pin + 1 < len(self.pins):
+                    newPins.append(int(self.pins[position_pin + 1]))
+                    print(newPins)
+                if position_pin + 2 < len(self.pins):
+                    newPins.append(self.MAX_VALUE - int(self.pins[position_pin + 1]))
+                    print(newPins)
+
+            #elif pin == self.slash and self.pins[position_pin + 1] == 'X':
+            #    newPins.append(self.MAX_VALUE - int(self.pins[position_pin - 1]))
+            #    print(newPins)
+            #    newPins.append('10')
+            #    print(newPins)
 
             elif pin == self.strike:
                 #primer_numero = self.pins[position_pin+1]
@@ -70,17 +83,16 @@ class ScoreCard:
                 #newPins.append(str(ScoreCard.MAX_VALUE))
                 #newPins.append(primer_numero)
                 #newPins.append(segundo_numero)
-                if self.pins[-1] == 'X' and self.pins[-2] == 'X' and self.pins[-3] == 'X' and position_pin == len(self.pins) - 1:
-                    newPins.append('-30')
-                    print(newPins)
                 newPins.append('10')
                 print(newPins)
-                if position_pin + 1 == 'X':
-                    newPins.append('10')
+                if self.pins[-1] == 'X' and self.pins[-2] == 'X' and self.pins[-3] == 'X' and position_pin == len(self.pins) - 3:
+                    newPins.append('-30')
                     print(newPins)
+                
                 if position_pin + 1 < len(self.pins):
                     newPins.append(int( 10 if self.pins[position_pin + 1] == 'X' else self.pins[position_pin + 1]))
                     print(newPins)
+                    print('a')
                 if position_pin + 2 < len(self.pins):
                     newPins.append(int( 10 if self.pins[position_pin + 2] == 'X' else self.pins[position_pin + 2]))
                     print(newPins)
